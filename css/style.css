@@ -1,0 +1,12 @@
+html, * {
+    font-family: helvetica;
+    box-sizing: border-box;
+  }
+
+div {
+    color: black;
+}
+
+body {
+    display: flex;
+}
