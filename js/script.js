@@ -5,7 +5,10 @@ var player1Deck = [];
 var player2Deck = [];
 var player1Card = ('');
 var player2Card = ('');
+var player1Hand = ('');
+var player2Hand = ('');
 var war = [];
+
 // build a 'master' deck of 'card' objects used to create shuffled decks
 var masterDeck = buildMasterDeck();
 renderDeckInContainer(masterDeck, document.getElementById('master-deck-container'));
@@ -37,10 +40,11 @@ function splitCards(deck)
     var i = 0;
     while(i != deck.length) 
     {
-        player1Hand.push(deck[i]);
-        player2Hand.push(deck[(i+1)]);
+        player1Hand.push(player1Deck[i]);
+        player2Hand.push(player2Deck[(i+1)]);
         i+=2
     }
+    //onsole.log(`Player one's deck is ${deck1}`)
 }
 
 
