@@ -20,19 +20,23 @@ var shuffledContainer = document.getElementById('shuffled-deck-container');
 document.querySelector('button').addEventListener('click', renderShuffledDeck);
 
 /*----- functions -----*/
-function renderShuffledDeck() {
+function renderShuffledDeck() 
+{
   // create a copy of the masterDeck (leave masterDeck untouched!)
   var tempDeck = masterDeck.slice();
   shuffledDeck = [];
-  while (tempDeck.length) {
+  while (tempDeck.length) 
+  {
     var rndIdx = Math.floor(Math.random() * tempDeck.length);
     shuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
   }
 }
 
-function splitCards(deck) {
+function splitCards(deck) 
+{
     var i = 0;
-    while(i != deck.length) {
+    while(i != deck.length) 
+    {
         player1Hand.push(deck[i]);
         player2Hand.push(deck[(i+1)]);
         i+=2
@@ -43,33 +47,71 @@ function splitCards(deck) {
 
 function compare() {
    
-    if (player1Card === player2Card)
+    if (player1Card === player2Card && (player1Deck.length !== 1 || player2Deck.length !== 1))
     {
         war();    
     } 
     else 
     {
-        player1Card > player2Card ? player1Deck.push() : player2Deck.push();
+        //TODO: give the winner of the comparison the cards in the 'war' array
+        player1Card > player2Card ? (player1Deck.push(player2Card, player1Card)  ): player2Deck.push(player1Card, player2Card);
+        player1Card = ('');
+        player2Card = ('');
     }
 
 }
 
 function war() {
     var warA = 4;
+    //both players have enough cards to play war
     if (player1Deck.length >= warA && player2Deck.length >= warA)
+    {
+        for(var i = 0; i < 3; i++)
         {
-            for(var i = 0; i < 3; i++)
-            {
-                player1Deck.pop();
-            }
-            for(var i = 0; i < 3; i++)
-            {
-                player2Deck.pop();
-            }
+            war += player1Deck.pop();
         }
-    if else(player1Deck.length <= warA)
+        for(var i = 0; i < 3; i++)
         {
-            
+            war += player2Deck.pop();
+        }
+        compare();
+    }
+    //player 1 doesn't have enough cards
+    else if (player1Deck.length <= warA && player2Deck.length >= warA)
+    {
+        insufficientCardsPop(player1Deck, player2Deck);
+        compare();
+    }
+    //player 2 doesn't have enough cards
+    else if (player2Deck.length <= warA && player1Deck.length >= warA)
+    {
+        insufficientCardsPop(player2Deck, player1Deck);
+        compare();
+    }
+    //neither player has enough cards
+    else if (player1Deck.length <= warA && player2Deck.length <= warA)
+    {
+        for(var i = 0; i < deck1.length; i++)
+        {
+            war += player1Deck.pop();
+        }
+        for(var i = 0; i < player2Deck.length; i++)
+        {
+            war += player2Deck.pop();
+        }
+        compare();
+    }
+}
+
+function insufficientCardsPop(deck1, deck2)
+{
+        for(var i = 0; i < deck1.length; i++)
+        {
+            war += deck1.pop();
+        }
+        for(var i = 0; i < 3; i++)
+        {
+            war += deck2.pop();
         }
 }
 
