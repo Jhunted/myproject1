@@ -45,6 +45,7 @@ function renderShuffledDeck()
     var rndIdx = Math.floor(Math.random() * tempDeck.length);
     shuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
   }
+  console.log('Shuffled Deck', shuffledDeck)
   splitCards(shuffledDeck);
 }
 
@@ -65,8 +66,6 @@ function buildMasterDeck() {
   }
   
   
-
-
 function splitCards(shuffledDeck) 
 {
      var i = 0;
@@ -76,18 +75,16 @@ function splitCards(shuffledDeck)
          player2Card.push(player2Deck[(i+1)]);
          i+=2
      }
-     //onsole.log(`Player one's deck is ${deck1}`)
     player1Deck = shuffledDeck.slice(0, 26);
+     console.log('player one has these cards ', player1Deck)
     player2Deck = shuffledDeck.slice(26, 53);
+     console.log('player two has these cards ', player2Deck)
 }
 
- 
-
 function compare() {
-   
     if (player1Card === player2Card && (player1Deck.length !== 1 || player2Deck.length !== 1))
     {
-        war();    
+        warAction();    
     } 
     else 
     {
@@ -99,46 +96,66 @@ function compare() {
 
 }
 
-function war() {
+// on play round button, begin game 
+
+function playCards(deck1, deck2) {
+    // pull a card from each players respective decks
+
+    // call "compareHand function "
+
+    
+}
+
+
+function compareHand(deck1, deck2) {
+    // pull P1 & P2's respective decks
+    
+    // who ever hads the higher card, will win both cards, call "redistribute function "
+
+    // in the event of a tie, proceed with "war action" function 
+
+}
+
+function warAction() {
     var warA = 4;
     //both players have enough cards to play war
-    if (player1Deck.length >= warA && player2Deck.length >= warA)
-    {
+    // if (player1Deck.length >= warA && player2Deck.length >= warA)
+    // {
         for(var i = 0; i < 3; i++)
         {
-            war += player1Deck.pop();
+            war.push(player1Deck.pop());
+            war.push(player2Deck.pop());
         }
-        for(var i = 0; i < 3; i++)
-        {
-            war += player2Deck.pop();
-        }
-        compare();
-    }
-    //player 1 doesn't have enough cards
-    else if (player1Deck.length <= warA && player2Deck.length >= warA)
-    {
-        insufficientCardsPop(player1Deck, player2Deck);
-        compare();
-    }
-    //player 2 doesn't have enough cards
-    else if (player2Deck.length <= warA && player1Deck.length >= warA)
-    {
-        insufficientCardsPop(player2Deck, player1Deck);
-        compare();
-    }
-    //neither player has enough cards
-    else if (player1Deck.length <= warA && player2Deck.length <= warA)
-    {
-        for(var i = 0; i < deck1.length; i++)
-        {
-            war += player1Deck.pop();
-        }
-        for(var i = 0; i < player2Deck.length; i++)
-        {
-            war += player2Deck.pop();
-        }
-        compare();
-    }
+        // for(var i = 0; i < 3; i++)
+        // {
+        // }
+        // compare();
+    // }
+    // //player 1 doesn't have enough cards
+    // else if (player1Deck.length <= warA && player2Deck.length >= warA)
+    // {
+    //     insufficientCardsPop(player1Deck, player2Deck);
+    //     compare();
+    // }
+    // //player 2 doesn't have enough cards
+    // else if (player2Deck.length <= warA && player1Deck.length >= warA)
+    // {
+    //     insufficientCardsPop(player2Deck, player1Deck);
+    //     compare();
+    // }
+    // //neither player has enough cards
+    // else if (player1Deck.length <= warA && player2Deck.length <= warA)
+    // {
+    //     for(var i = 0; i < player1Deck.length; i++)
+    //     {
+    //         war += player1Deck.pop();
+    //     }
+    //     for(var i = 0; i < player2Deck.length; i++)
+    //     {
+    //         war += player2Deck.pop();
+    //     }
+    //     compare();
+    // }
 }
 
 function insufficientCardsPop(deck1, deck2)
