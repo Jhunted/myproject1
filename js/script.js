@@ -7,11 +7,14 @@ var player1Card = ('');
 var player2Card = ('');
 var player1Hand = ('');
 var player2Hand = ('');
+var masterDeck = buildMasterDeck();
+var shuffledDeck;
 var war = [];
+
 
 // build a 'master' deck of 'card' objects used to create shuffled decks
 var masterDeck = buildMasterDeck();
-renderDeckInContainer(masterDeck, document.getElementById('master-deck-container'));
+//renderDeckInContainer(masterDeck, document.getElementById('master-deck-container'));
 
 /*----- app's state (variables) -----*/
 var shuffledDeck;
@@ -23,6 +26,15 @@ var shuffledContainer = document.getElementById('shuffled-deck-container');
 document.querySelector('button').addEventListener('click', renderShuffledDeck);
 
 /*----- functions -----*/
+init();
+
+function init() 
+    {
+        buildMasterDeck();
+        
+    }
+
+
 function renderShuffledDeck() 
 {
   // create a copy of the masterDeck (leave masterDeck untouched!)
@@ -33,21 +45,43 @@ function renderShuffledDeck()
     var rndIdx = Math.floor(Math.random() * tempDeck.length);
     shuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
   }
+  splitCards(shuffledDeck);
 }
 
-function splitCards(deck) 
+
+renderShuffledDeck();
+
+function buildMasterDeck() {
+    var deck = [];
+    suits.forEach(function(suit) {
+      ranks.forEach(function(rank) {
+        deck.push({
+          // the 'face' property maps to the CSS classes for cards
+          face: `${suit}${rank}`,
+        });
+      });
+    });
+    return deck;
+  }
+  
+  
+
+
+function splitCards(shuffledDeck) 
 {
-    var i = 0;
-    while(i != deck.length) 
-    {
-        player1Hand.push(player1Deck[i]);
-        player2Hand.push(player2Deck[(i+1)]);
-        i+=2
-    }
-    //onsole.log(`Player one's deck is ${deck1}`)
+     var i = 0;
+     while(i != player1Deck.length, player2Deck.length) 
+     {
+         player1Card.push(player1Deck[i]);
+         player2Card.push(player2Deck[(i+1)]);
+         i+=2
+     }
+     //onsole.log(`Player one's deck is ${deck1}`)
+    player1Deck = shuffledDeck.slice(0, 26);
+    player2Deck = shuffledDeck.slice(26, 53);
 }
 
-
+ 
 
 function compare() {
    
@@ -118,4 +152,6 @@ function insufficientCardsPop(deck1, deck2)
             war += deck2.pop();
         }
 }
+
+
 
