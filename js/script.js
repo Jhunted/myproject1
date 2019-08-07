@@ -86,7 +86,8 @@ function playCards(deck1, deck2) {
     // POP to pull cards out, UNSHIFT to push cards in. 
     player1Card = deck1[0];
     player2Card = deck2[0];
-    warDeck += (deck1[0], deck2[0]);
+    warDeck += (deck1[0]);
+    warDeck += (deck2[0]);
     //console.log(warDeck);
     player1Deck.shift();
     player2Deck.shift();
@@ -106,6 +107,7 @@ function playCards(deck1, deck2) {
 
 
 function compare() {
+    console.log("WarDeck: \n" + warDeck);
     if (player1Card.rank === player2Card.rank && (player1Deck.length !== 1 || player2Deck.length !== 1) && !isWar)
     {
         console.log("***War BITCH***");
@@ -116,20 +118,18 @@ function compare() {
         console.log("***comparing cards***");
         //TODO: give the winner of the comparison the cards in the 'war' array
         player1Card.rank > player2Card.rank
-        ?
-            (player1Deck.push(warDeck),
+        ?(player1Deck.push(warDeck),
             // console.log(player1Card.face),
             // console.log(player2Card.face))
             console.log("player 1: " + player1Card.face+ "\n player 2: " + player2Card.face + "\n player 1 wins!")) 
-        : 
-            (player2Deck.push(warDeck),
+        : (player2Deck.push(warDeck),
             // console.log(player1Card.face),
             // console.log(player2Card.face))
             console.log("player 1: " + player1Card.face + "\n player 2: " + player2Card.face + "\n player 2 wins!"));
         player1Card = ('');
         player2Card = ('');
     }
-
+    warDeck = [];
 }
 
 // on play round button, begin game 
@@ -154,8 +154,11 @@ function warAction() {
     {
         for(var i = 0; i < 3; i++)
         {
-            war.push(player1Deck.pop());
-            war.push(player2Deck.pop());
+            warDeck += player1Deck[0];
+            player1Deck.shift();
+            warDeck += player2Deck[0];
+            player2Deck.shift();
+
         }
         
         
