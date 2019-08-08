@@ -1,5 +1,5 @@
 /*----- constants -----*/
-var suits = ['spade', 'club', 'diamond', 'heart'];
+var suits = ['spades', 'clubs', 'diamonds', 'hearts'];
 var ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14'];
 var player1Card = [];
 var player2Card = [];
@@ -12,18 +12,28 @@ var player1Deck = [];
 var player2Deck = [];
 
 /*----- cached element references -----*/
-var shuffledContainer = document.getElementById('shuffled-deck-container');
+// var shuffledContainer = document.getElementById('shuffled-deck-container');
+const player1cardrender = document.querySelector('.cardplayer1');
+const player2cardrender = document.querySelector('.cardplayer2');
+
 
 /*----- event listeners -----*/
-//document.querySelector('button').addEventListener('click', playCards());
+document.getElementById('play').addEventListener('click', playCards);
+document.getElementById('end').addEventListener('click', endGame);
+document.getElementById('reset').addEventListener('click', resetGame);
 
 /*----- functions -----*/
 init();
 renderShuffledDeck();
 
+
+
+
 function init() 
     {
-        masterDeck = buildMasterDeck();      
+        masterDeck = buildMasterDeck();  
+        player1cardrender.innerHTML = `<div class="card back-blue"></div>`;
+        player2cardrender.innerHTML = `<div class="card back-blue"></div>`;    
     }
    
     function buildMasterDeck() {
@@ -33,7 +43,7 @@ function init()
             deck.push({
              face: `${suit}${rank}`,
              suit: `${suit}`,
-             rank: `${rank}`
+             rank: `r${rank}`
             });
           });
         });
@@ -65,10 +75,11 @@ function playCards() {
     let p2card = player2Deck.shift();
     warDeck.push(p1card);
     warDeck.push(p2card);
+    renderCard();
     
     testFucntion(p1card, p2card, warDeck);
     warDeck = [];
-    //render();
+    
 };
 
 let testFucntion = (c1, c2, warDeck) => {
@@ -97,3 +108,29 @@ function war() {
     playCards(warDeck);
 }
 
+function renderWinner() {
+    if (player1Deck.length > player2Deck.length) { 
+        console.log('player 1 wins')
+    } else if (player2Deck.length === player1Deck.length) {
+        console.log('tie game')
+    } else {
+        console.log('winner')
+    }
+
+    };
+
+
+
+
+function renderCard() {
+    player1cardrender.innerHTML = `<div class="card ${warDeck[0].suit} ${warDeck[0].rank}"></div>`;
+    player2cardrender.innerHTML = `<div class="card ${warDeck[1].suit} ${warDeck[1].rank}"></div>`;
+}
+
+    function resetGame() {
+        init();
+}
+
+function endGame() {
+    renderWinner();
+}

@@ -3,15 +3,45 @@ html, * {
     box-sizing: border-box;
   }
 
-div {
-    color: black;
+  body {
+    margin: 0;
+    font-family: Helvetica;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10vmin 1fr 20vmin;
+    grid-template-areas: 
+        "hdr"
+        "main"
+        "ftr";
 }
 
-body {
+nav {
+    grid-area: hdr;
     display: flex;
+    background-color: #D33A2C;
+    height: 50vh;
+    justify-content: space-between;
+    
 }
 
-textarea {
-    width: 190px;
-    height: 100px;
-  }
+button {
+    background-color: #D33A2C;
+    border: 3px solid #ffffff;
+    border-radius: 20%;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 16px;
+    margin: 20px;
+    height: 40px;
+    width: 80px;
+}
+
+.mainLogo img {
+    margin: 20px;
+    height: 75px;
+    
+}
+
+
+
+
