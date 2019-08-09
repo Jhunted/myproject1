@@ -6,13 +6,42 @@ html, * {
   body {
     margin: 0;
     font-family: Helvetica;
+    max-height: 600px;
+    
+}
+
+grid-container{
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 10vmin 1fr 20vmin;
-    grid-template-areas: 
-        "hdr"
-        "main"
-        "ftr";
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 10px;
+  padding: 10px;
+  height: 100vh;
+  background-color: grey;
+}
+
+#card_container_1{
+    grid-column: 1/1;
+    grid-row: 1/1;
+    text-align: center;
+    font-size: 4vmin;
+    
+}
+
+#card_container_2{
+    grid-column: 2/2;
+    grid-row: 1/1;
+    text-align: center;
+    font-size: 4vmin;
+
+}
+
+#button_container{
+    grid-column: 1 / span 2;
+    grid-row: 2/2;
+    text-align: center;
+    
+
 }
 
 nav {
@@ -30,17 +59,15 @@ button {
     border-radius: 20%;
     color: #FFFFFF;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 3vmin;
     margin: 20px;
-    height: 40px;
-    width: 80px;
+   
 }
 
-.mainLogo img {
-    margin: 20px;
-    height: 75px;
-    
+#gameTitle {
+    text-align: center;
 }
+
 
 
 

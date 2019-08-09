@@ -5,21 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>War...war never changes</title>
+    <link rel='icon' href='images/warfav.jpg' type='image/x-icon'/>
     <link href="css/cardstarter.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
     <script defer src="js/script.js"></script>
     <title>Document</title>
 </head>
 <body>
-     
-    <h1 class="player1">PLAYER1</h1>
-    <h1 class="player2">PLAYER2</h1>
-    <div class="cardplayer1"></div>
-    <div class="cardplayer2"></div>
-    <h2></h2>
-    <button id='play'>PLAY</button>
-    <button id='reset'>RESET</button>
-    <button id='end'>END</button>
+    <h1 class id="gameTitle">WAR</h1>
+    <grid-container>
+        <grid-item id="card_container_1">
+            <h1 class="player1">PLAYER</h1>
+            <h2 id="counterplayer1"></h2>
+            <div class="cardplayer1"></div>
+        </grid-item>
+        <grid-item id="card_container_2">
+            <h1 class="player2">COMP</h1>
+            <h2 id="counterplayer2"></h2>
+            <div class="cardplayer2"></div>
+        </grid-item>  
+        <grid-item id="button_container">
+            <button id='play'>PLAY</button>
+            <button id='reset'>RESET</button>
+            <button id='end'>END</button>
+        </grid-item>
+    </grid-container>
     
 </body>
 </html>

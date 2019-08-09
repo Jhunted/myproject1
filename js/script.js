@@ -5,6 +5,9 @@ var player1Card = [];
 var player2Card = [];
 var warDeck = [];
 var isWar = false;
+const counterplayer1 = document.getElementById('counterplayer1')
+const counterplayer2 = document.getElementById('counterplayer2')
+let cardCount
 
 /*----- app's state (variables) -----*/
 var shuffledDeck;
@@ -12,25 +15,25 @@ var player1Deck = [];
 var player2Deck = [];
 
 /*----- cached element references -----*/
-// var shuffledContainer = document.getElementById('shuffled-deck-container');
 const player1cardrender = document.querySelector('.cardplayer1');
 const player2cardrender = document.querySelector('.cardplayer2');
 
-
-/*----- event listeners -----*/
 document.getElementById('play').addEventListener('click', playCards);
 document.getElementById('end').addEventListener('click', endGame);
 document.getElementById('reset').addEventListener('click', resetGame);
 
 /*----- functions -----*/
 init();
-renderShuffledDeck();
-
-
-
+splitCards(copyDeck());
 
 function init() 
     {
+        console.log("RESETTING GAME");
+        cardCount = {
+            player1: 0,
+            player2: 0
+        };
+            cardCounter();
         masterDeck = buildMasterDeck();  
         player1cardrender.innerHTML = `<div class="card back-blue"></div>`;
         player2cardrender.innerHTML = `<div class="card back-blue"></div>`;    
@@ -50,7 +53,7 @@ function init()
         return deck;
     }
 
-function renderShuffledDeck() 
+function copyDeck() 
 {
   var tempDeck = masterDeck.slice();
   shuffledDeck = [];
@@ -60,7 +63,7 @@ function renderShuffledDeck()
     shuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
   }
   
-  splitCards(shuffledDeck);
+   return shuffledDeck;
 }
 
 function splitCards(shuffledDeck) 
@@ -69,37 +72,42 @@ function splitCards(shuffledDeck)
     player2Deck = shuffledDeck.slice(26, 53);
 }
 
-
 function playCards() {
+
+    if(player1Deck.length === 0 || player2Deck.length === 0)
+    {
+        renderWinner();
+    }
+    cardCounter();
+
     let p1card = player1Deck.shift();
     let p2card = player2Deck.shift();
+
+
     warDeck.push(p1card);
     warDeck.push(p2card);
+
     renderCard();
-    
-    testFucntion(p1card, p2card, warDeck);
+        
+    comparison(p1card, p2card, warDeck);
     warDeck = [];
     
 };
 
-let testFucntion = (c1, c2, warDeck) => {
-    
-    console.log('should be readable obj', c1)
-    console.log('test function response', c1.rank + " and " + c2.rank)
+let comparison = (c1, c2, warDeck) => {
     if (c1.rank > c2.rank) {
-        console.log('p1 wins');
        player1Deck = player1Deck.concat(warDeck);
         
     }
     if (c1.rank < c2.rank) {
-        console.log('p2 wins');
        player2Deck = player2Deck.concat(warDeck);
         
     }
     if (c1.rank === c2.rank) { 
-        console.log("************LET THERE BE WAR, BITCH!***************");
         war();
+        window.alert("WAR!")
     }
+    cardCounter();
 }
 
 function war() {
@@ -110,27 +118,35 @@ function war() {
 
 function renderWinner() {
     if (player1Deck.length > player2Deck.length) { 
-        console.log('player 1 wins')
-    } else if (player2Deck.length === player1Deck.length) {
-        console.log('tie game')
-    } else {
-        console.log('winner')
+        window.alert("player 1 wins");
+        
+    }  else if (player2Deck.length > player1Card.length){
+        window.alert("Comp wins")
+    
     }
+    else if (player2Deck.length === player1Deck.length) {
+        window.alert("tie game!")
+    
+    }
+};
 
-    };
-
-
-
+function cardCounter() {
+    cardCount.player1 = (counterplayer1.textContent = player1Deck.length);
+    cardCount.player2 = (counterplayer2.textContent = player2Deck.length);
+}
 
 function renderCard() {
     player1cardrender.innerHTML = `<div class="card ${warDeck[0].suit} ${warDeck[0].rank}"></div>`;
     player2cardrender.innerHTML = `<div class="card ${warDeck[1].suit} ${warDeck[1].rank}"></div>`;
 }
 
-    function resetGame() {
-        init();
+function resetGame() {
+    init();
+    splitCards(copyDeck());
+    cardCounter();
 }
 
 function endGame() {
+    window.alert('game Over')
     renderWinner();
 }
