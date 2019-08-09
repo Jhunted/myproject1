@@ -24,10 +24,4 @@ In the event of a tie, the players have a "war." Each player places three cards 
 Winning
 The first player to win the entire deck of cards is the winner. Alternatively, because winning the entire deck can take a long time, the first player to win three wars is the winner.
 
-Alternative Way of Playing
-This simple variant, designed by Erik Arneson, adds some decision-making to the game.
-
-After the cards are dealt, each player draws the top three from his pile and holds them in his hand. On each turn, he chooses one card to play and then draws a new card to refresh his hand to three cards.
-
-When a tie occurs, each player takes three cards from his face down pile and puts them in the middle, still face down. He then chooses a card from his hand to play as the face-up fourth card. The player who plays the higher card takes all six of the face-down cards plus the two "fourth" cards. The player who plays the lower card takes the two cards which caused the war to take place.
 
